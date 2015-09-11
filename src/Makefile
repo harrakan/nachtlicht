@@ -36,7 +36,7 @@ $(ODIR)/%.o: %.c $(DEPS)
 
 nachtlicht: $(DEPS)
 	@echo Building $@
-	@$(CC) $(CFLAGS) -o $(ODIR)/$@.o main.c  ../include/light_ws2812.c
+	@$(CC) $(CFLAGS) -o $(ODIR)/$@.o main.c ../include/light_ws2812.c
 	@avr-size $(ODIR)/$@.o
 	@avr-objcopy -j .text  -j .data -O ihex $(ODIR)/$@.o $(BDIR)/$@.hex
 	@avr-objdump -d -S $(ODIR)/$@.o > $(ODIR)/$@.lss
@@ -45,7 +45,7 @@ nachtlicht: $(DEPS)
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o $(BDIR)/*.hex
+	rm -f $(ODIR)/*.o $(ODIR)/*.lss $(BDIR)/*.hex
 	
 program : nachtlicht
 	sudo gpio -g mode 22 out
